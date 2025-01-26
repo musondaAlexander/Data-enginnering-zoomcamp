@@ -7,3 +7,6 @@
 
 # Ignore postgres-db-volume directory
 postgres-db-volume/
+
+#ignore the yellow_tripdata_2019-01.csv file
+yellow_tripdata_2021.csv
