@@ -1,0 +1,9 @@
+# Ignore PostgreSQL files
+*.sql
+*.pgsql
+*.pgdump
+*.pgbackup
+*.pgdata
+
+# Ignore postgres-db-volume directory
+postgres-db-volume/

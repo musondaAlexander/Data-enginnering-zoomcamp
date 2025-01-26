@@ -1,0 +1,94 @@
+File to used to track commands that are run during the week one of the ZOOMCAMP
+
+
+docker run -it \
+   -e POSTGRES_USER="root" \
+   -e POSTGRES_PASSWORD= "root" \
+   -e POSTGRES_DB="ny_taxi" \ 
+   -v c:/Users/muson/Documents/Data-enginnering-zoomcamp/week_one/DOCKER_SQL/postgres-db-volume/var/lib/postgresql/data
+   -P 5432:5432 \ 
+   postgres:13 
+
+
+
+docker run -it \
+  -e POSTGRES_USER="root" \
+  -e POSTGRES_PASSWORD="root" \
+  -e POSTGRES_DB="ny_taxi" \
+  -v c:/Users/muson/Documents/Data-enginnering-zoomcamp/week_one/DOCKER_SQL/postgres-db-volume/var/lib/postgresql/data
+  -p 5432:5432 \
+  postgres:13
+
+
+   The Following Command shows the current running images. 
+   - docker ps  
+
+
+
+To connect to postgres using cmd use the Following lib that is  in python 
+-pgcli 
+ 
+ it takes the following argumens 
+
+ pgcli -h locahost -p 5432 -u root -d ny_taxi
+
+ once connected we can run 
+ \dt to show all the list of tables we have in the databse 
+
+ Once  the Files is downloaded for ny_taxi 
+ you can run the following commnd to check the head of the data 
+
+ head -n 100 yellow_tripdata_2021-01.csv
+
+ 
+ head -n 100 yellow_tripdata_2021-01.csv > yellow_tripdata_2021_head.csv //saves the data to a different file 
+
+ wc -l yellow_tripdata_2021 // this counts the number of rows in a dataset
+
+
+loading the data to postgres using python
+
+print(pd.io.sql.get_schema(df, name="yellow_tripdata_2021")) //Returns the schema of the datset
+
+convert the pick_up time to datetime 
+
+pd.to_datetime(df.tpep_pickup_datetime) conversion to datetime
+
+
+Now We need to connect to the databse 
+
+pip install sqlalchemy
+from sqlalchemy import create_engine 
+
+ engine = create_engine('postgresql://root:root@locahost:5432/ny_taxi')
+
+ engine.connect()
+
+Create the schema for postgres
+print(pd.io.sql.get_schema(df, name="yellow_tripdata_2021", con=engine))
+
+
+Since the dataset has more than 1000000 rows we need to chunck it(batch)
+
+df_iter = pd.read_cv('yellow_tripdata_2021', iterator=true, chuncksize=100000)
+
+df = next(df_iter)
+
+to create the schema we only need the column names and the data types associated with them. 
+
+df.head(n=0)
+
+df.head(n=0).to_sql(name'yellow_taxi_data', con = engine, if_exist='replace')
+
+%time df.to_sql(name'yellow_taxi_data', con = engine, if_exist='append')  
+
+Do a while loop to insert all the data into the database 
+
+
+
+
+
+
+
+
+
