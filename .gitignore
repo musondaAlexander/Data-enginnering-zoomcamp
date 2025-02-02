@@ -1,5 +1,4 @@
 # Ignore PostgreSQL files
-*.sql
 *.pgsql
 *.pgdump
 *.pgbackup
@@ -10,3 +9,5 @@ postgres-db-volume/
 
 #ignore the yellow_tripdata_2019-01.csv file
 yellow_tripdata_2021.csv
+green_tripdata_202-10.csv
+taxi_zone_lookup.csv
