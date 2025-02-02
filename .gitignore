@@ -11,3 +11,4 @@ postgres-db-volume/
 yellow_tripdata_2021.csv
 green_tripdata_202-10.csv
 taxi_zone_lookup.csv
+terakey.json
